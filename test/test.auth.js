@@ -194,6 +194,14 @@ describe('Authentication', function() {
         scope: ['user_read', 'channel_read']
       });
       lastShouldMatch('response_type=token&client_id=myclientid&redirect_uri=http%3A%2F%2Fmyappurl.net&scope=user_read+channel_read');
+
+      Twitch.login({
+        redirect_uri: 'http://myappurl.net',
+        popup: true,
+        scope: ['user_read', 'channel_read'],
+        force_verify: true
+      });
+      lastShouldMatch('response_type=token&client_id=myclientid&redirect_uri=http%3A%2F%2Fmyappurl.net&scope=user_read+channel_read&force_verify=true');
     });
   });
 

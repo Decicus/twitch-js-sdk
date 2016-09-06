@@ -49,6 +49,16 @@ $('.twitch-connect').click(function() {
 })
 ```
 
+You can also force the user to authorize the application once again (and giving them a chance to log into a separate account):
+```javascript
+$('.twitch-connect').click(function() {
+  Twitch.login({
+    scope: ['user_read', 'channel_read'],
+    force_verify: true
+  });
+})
+```
+
 You probably only want to show the button when the user is not logged in, so add this to the callback on Twitch.init:
 
 ```javascript
@@ -80,7 +90,7 @@ For an example of integrating the Twitch SDK with login functionality, please ch
 
 ### Twitch.init
 
-Initialize the Twitch API with your Client ID. This method must be called prior to other actions. If the user is already authenticated, you can perform authenticated actions after initialization. Otherwise, you must call Twitch.login to have the user authorize your app. 
+Initialize the Twitch API with your Client ID. This method must be called prior to other actions. If the user is already authenticated, you can perform authenticated actions after initialization. Otherwise, you must call Twitch.login to have the user authorize your app.
 
 #### Usage
 
@@ -227,7 +237,7 @@ Twitch.events.removeListener('auth.login', handleLogin);
 
 ### auth.login
 
-This event is emitted when we initialize a session for a user, either because the current page is a login `redirect_uri` or we have restored the session from persistent storage. 
+This event is emitted when we initialize a session for a user, either because the current page is a login `redirect_uri` or we have restored the session from persistent storage.
 
 ### auth.logout
 

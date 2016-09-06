@@ -343,7 +343,12 @@
     if (!params.client_id) {
       throw new Error('You must call init() before login()');
     }
-    
+
+    // Force the user to authorize the application again
+    if (options.force_verify) {
+      params.force_verify = options.force_verify;
+    }
+
     var url = Twitch.baseUrl + 'oauth2/authorize?' + $.param(params);
 
     if (options.popup) {
@@ -425,7 +430,8 @@
     login: login,
     logout: logout
   });
-})();// ## Events
+})();
+// ## Events
 /**
  * EventEmitter v3.1.4
  * https://github.com/Wolfy87/EventEmitter
